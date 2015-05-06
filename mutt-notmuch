@@ -3,6 +3,8 @@
 # Re-implementation of http://upsilon.cc/~zack/blog/posts/2011/01/how_to_use_Notmuch_with_Mutt/mutt-notmuch
 # in Python with no third-party dependencies
 
+# License: GNU General Public License (GPL), version 3 or above
+
 import argparse
 import mailbox
 import os
