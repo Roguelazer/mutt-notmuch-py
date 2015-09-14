@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 
-# Re-implementation of http://upsilon.cc/~zack/blog/posts/2011/01/how_to_use_Notmuch_with_Mutt/mutt-notmuch
+# Re-implementation of
+#  http://upsilon.cc/~zack/blog/posts/2011/01/how_to_use_Notmuch_with_Mutt/mutt-notmuch
 # in Python with no third-party dependencies
 
 # License: GNU General Public License (GPL), version 3 or above
 
 import argparse
+import errno
 import mailbox
 import os
 import os.path
@@ -21,7 +23,11 @@ HISTFILE = os.path.expanduser('~/.mutt-notmuch-history')
 
 
 def empty_maildir(odir):
-    shutil.rmtree(odir)
+    try:
+        shutil.rmtree(odir)
+    except OSError as e:
+        if e.errno != errno.ENOENT:
+            raise
     mailbox.Maildir(odir, create=True)
 
 
